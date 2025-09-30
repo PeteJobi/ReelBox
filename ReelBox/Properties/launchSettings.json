@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "ReelBox (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "ReelBox (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
