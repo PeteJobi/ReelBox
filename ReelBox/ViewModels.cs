@@ -158,10 +158,10 @@ namespace ReelBox
             if (SampleRate != null) parts.Add(SampleRate);
             switch (FileSize)
             {
-                case >= 1024 * 1024 * 1024:
+                case >= 1000 * 1000 * 1000:
                     parts.Add($"{FileSize / (1024 * 1024 * 1024):0.##} GB");
                     break;
-                case >= 1024 * 1024:
+                case >= 1000 * 1000:
                     parts.Add($"{FileSize / (1024 * 1024):0.##} MB");
                     break;
                 default:
