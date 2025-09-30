@@ -35,6 +35,7 @@
                         </Grid.ColumnDefinitions>
                         <FontIcon Glyph="{x:Bind Icon}" VerticalAlignment="Center"/>
                         <TextBlock Grid.Column="1" Text="{x:Bind FileName}" Style="{StaticResource SubtitleTextBlockStyle}" LineHeight="17"
+                                   ToolTipService.ToolTip="{x:Bind FilePath}"
                                    VerticalAlignment="Center" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap" LineStackingStrategy="BlockLineHeight"/>
                     </Grid>
                 </CheckBox>
@@ -89,7 +90,7 @@
                         </Grid.ColumnDefinitions>
                         <FontIcon Glyph="{x:Bind Icon}" FontSize="25" VerticalAlignment="Center"/>
                         <TextBlock Grid.Column="1" Text="{x:Bind FileName}" FontSize="20" LineHeight="15" LineStackingStrategy="BlockLineHeight"
-                                   VerticalAlignment="Center" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"/>
+                                   VerticalAlignment="Center" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap" ToolTipService.ToolTip="{x:Bind FilePath}"/>
                     </Grid>
                 </CheckBox>
                 <CommandBar Grid.Column="1" DataContext="{x:Bind}" Loaded="FrameworkElement_OnLoaded"/>
