@@ -23,8 +23,6 @@ namespace ReelBox
         public static readonly List<string> AllSupportedTypes = SupportedVideoTypes.Concat(SupportedAudioTypes).Concat(SupportedImageTypes).Concat(SupportedSubtitleTypes).ToList();
         public static readonly int MaxThumbnailWidth = 196;
         public static readonly int MaxThumbnailHeight = 110;
-        private Process? currentProcess;
-        private bool hasBeenKilled;
 
         public Processor(string ffmpegPath)
         {
@@ -35,8 +33,11 @@ namespace ReelBox
 
         private static string ThumbnailFolder() => Path.Join(Path.GetTempPath(), "ReelBoxThumbnails") + "/";
 
-        public static Medium GetMedium(string path)
+        public static Medium? GetMedium(string path)
         {
+            var extension = Path.GetExtension(path).ToLower();
+            if (!File.Exists(path) || !AllSupportedTypes.Contains(extension)) return null;
+
             var mediaType = Path.GetExtension(path).ToLower() switch
             {
                 var ext when SupportedVideoTypes.Contains(ext) => MediaType.Video,
@@ -45,6 +46,7 @@ namespace ReelBox
                 var ext when SupportedSubtitleTypes.Contains(ext) => MediaType.Subtitle,
                 _ => throw new ArgumentOutOfRangeException()
             };
+
             return new Medium
             {
                 FilePath = path,
@@ -69,7 +71,7 @@ namespace ReelBox
             {
                 await StartProcess($"-i \"{mediaPath}\"", null, (sender, args) =>
                 {
-                    if (string.IsNullOrWhiteSpace(args.Data) || hasBeenKilled) return;
+                    if (string.IsNullOrWhiteSpace(args.Data)) return;
                     Debug.WriteLine(args.Data);
                     if (details.Duration == null)
                     {
@@ -113,7 +115,7 @@ namespace ReelBox
                 var valuesSet = false;
                 await StartProcess($"-i \"{mediaPath}\"", null, (sender, args) =>
                 {
-                    if (valuesSet || string.IsNullOrWhiteSpace(args.Data) || hasBeenKilled) return;
+                    if (valuesSet || string.IsNullOrWhiteSpace(args.Data)) return;
                     var matchCollection = Regex.Matches(args.Data, @"\s*Stream #\d+:\d+.*?: Video: .+?, (\d+x\d+)(?:.*?(\d+ kb/s))?(?:.*?(\d+?\.?\d*? fps))?");
                     if (matchCollection.Count == 0) return;
                     details.Resolution = matchCollection[0].Groups[1].Value;
@@ -142,7 +144,7 @@ namespace ReelBox
                 await StartProcess($"-i \"{mediaPath}\"", null, (sender, args) =>
                 {
                     Debug.WriteLine(args.Data);
-                    if (valuesSet || string.IsNullOrWhiteSpace(args.Data) || hasBeenKilled) return;
+                    if (valuesSet || string.IsNullOrWhiteSpace(args.Data)) return;
                     var matchCollection = Regex.Matches(args.Data, @"\s*Stream #\d+:\d+.*?: Audio: .+?, (\d+ Hz).+?, (\d+ kb/s)");
                     if (matchCollection.Count == 0) return;
                     details.SampleRate = matchCollection[0].Groups[1].Value;
@@ -175,10 +177,8 @@ namespace ReelBox
             ffmpeg.Start();
             ffmpeg.BeginErrorReadLine();
             ffmpeg.BeginOutputReadLine();
-            currentProcess = ffmpeg;
             await ffmpeg.WaitForExitAsync();
             ffmpeg.Dispose();
-            currentProcess = null;
         }
     }
 }

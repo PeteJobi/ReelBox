@@ -52,6 +52,7 @@ namespace ReelBox
             foreach (var path in paths)
             {
                 var medium = Processor.GetMedium(path);
+                if(medium == null) continue;
                 newMedia.Add(medium);
                 if (insertAtEnd) viewModel.Media.Add(medium);
                 else viewModel.Media.Insert(index++, medium);
