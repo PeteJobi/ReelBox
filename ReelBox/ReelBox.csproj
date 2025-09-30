@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.WinUI.Converters" Version="8.2.250402" />
+    <PackageReference Include="CommunityToolkit.WinUI.Extensions" Version="8.2.250402" />
     <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.26100.6584" />
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.8.250916003" />
   </ItemGroup>
@@ -67,4 +68,12 @@
     <PublishTrimmed Condition="'$(Configuration)' == 'Debug'">False</PublishTrimmed>
     <PublishTrimmed Condition="'$(Configuration)' != 'Debug'">True</PublishTrimmed>
   </PropertyGroup>
+  <Import Project="..\CompressMediaPageWinUI\CompressMediaPage.projitems" Label="Shared" />
+  <Import Project="..\ConcatMediaPageWinUI\ConcatMediaPage.projitems" Label="Shared" />
+  <Import Project="..\VideoSplitterPageWinUI\VideoSplitterPage.projitems" Label="Shared" />
+  <Import Project="..\VideoCropperPageWinUI\VideoCropperPage.projitems" Label="Shared" />
+  <Import Project="..\MediaTrackMixerPageWinUI\MediaTrackMixerPage.projitems" Label="Shared" />
+  <Import Project="..\ImageTourPageWinUI\ImageTourPage.projitems" Label="Shared" />
+  <Import Project="..\DraggerResizerWinUI\DraggerResizer.projitems" Label="Shared" />
+  <Import Project="..\VideoSplitterBaseWinUI\VideoSplitterBase.projitems" Label="Shared" />
 </Project>
