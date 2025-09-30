@@ -18,7 +18,12 @@ using Windows.ApplicationModel.DataTransfer;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Storage.Pickers;
-using static System.Collections.Specialized.BitVector32;
+using CompressMediaPage;
+using ConcatMediaPage;
+using ImageTour;
+using MediaTrackMixerPage;
+using VideoCropper;
+using VideoSplitter;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -30,21 +35,26 @@ namespace ReelBox
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        public MainModel viewModel = new(){ Media = [] };
-        public Processor processor;
+        private MainModel viewModel = new(){ Media = [] };
+        private Processor processor;
+        private string ffmpegPath;
+        private Medium? currentActionMedium;
+
         public MainPage()
         {
             InitializeComponent();
         }
 
-        private async Task AddMedia(string[] paths)
+        private async Task AddMedia(string[] paths, int index = 0)
         {
+            var insertAtEnd = index == 0;
             var newMedia = new List<Medium>();
             foreach (var path in paths)
             {
                 var medium = Processor.GetMedium(path);
                 newMedia.Add(medium);
-                viewModel.Media.Add(medium);
+                if (insertAtEnd) viewModel.Media.Add(medium);
+                else viewModel.Media.Insert(index++, medium);
                 medium.PropertyChanged += (sender, args) =>
                 {
                     if (args.PropertyName == nameof(Medium.IsSelected)) SetSelectedBools();
@@ -102,12 +112,50 @@ namespace ReelBox
         {
             var button = (AppBarButton)sender;
             var actionModel = (ActionModel)button.DataContext;
+            currentActionMedium = actionModel.Owner;
+            var mediaPath = actionModel.Owner.FilePath;
+            var thisTypeName = typeof(MainPage).FullName;
 
+            switch (actionModel.Action)
+            {
+                case Action.Split:
+                    Frame.Navigate(typeof(VideoSplitter.VideoSplitterPage), new SplitterProps { FfmpegPath = ffmpegPath, VideoPath = mediaPath, TypeToNavigateTo = thisTypeName });
+                    break;
+                case Action.Merge:
+                    Frame.Navigate(typeof(ConcatMediaPage.ConcatMediaPage), new ConcatProps { FfmpegPath = ffmpegPath, MediaPaths = [mediaPath], TypeToNavigateTo = thisTypeName });
+                    break;
+                case Action.Crop:
+                    Frame.Navigate(typeof(VideoCropper.VideoCropperPage), new CropperProps { FfmpegPath = ffmpegPath, VideoPath = mediaPath, TypeToNavigateTo = thisTypeName });
+                    break;
+                case Action.Compress:
+                    Frame.Navigate(typeof(CompressMediaPage.CompressMediaPage), new CompressProps { FfmpegPath = ffmpegPath, MediaPath = mediaPath, TypeToNavigateTo = thisTypeName });
+                    break;
+                case Action.Mix:
+                    Frame.Navigate(typeof(MediaTrackMixerMainPage), new MixerProps { FfmpegPath = ffmpegPath, MediaPaths = [mediaPath], TypeToNavigateTo = thisTypeName });
+                    break;
+                case Action.Tour:
+                    Frame.Navigate(typeof(ImageTour.ImageTourPage), new TourProps { FfmpegPath = ffmpegPath, MediaPath = mediaPath, TypeToNavigateTo = thisTypeName });
+                    break;
+            }
+        }
+
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
+        {
+            if (e.Parameter is string outputFile)
+            {
+                await AddMedia([outputFile], viewModel.Media.IndexOf(currentActionMedium) + 1);
+            }
+
+            if (e.Parameter is List<string> outputFiles)
+            {
+                await AddMedia(outputFiles.ToArray(), viewModel.Media.IndexOf(currentActionMedium) + 1);
+            }
+
+            currentActionMedium = null;
         }
 
         private async void MainPage_OnLoaded(object sender, RoutedEventArgs e)
         {
-            string ffmpegPath;
             try
             {
                 ffmpegPath = Path.Join(Package.Current.InstalledLocation.Path, "Assets/ffmpeg.exe");
@@ -122,9 +170,6 @@ namespace ReelBox
                 return;
             }
             processor = new Processor(ffmpegPath);
-            await AddMedia([
-                @"C:\Users\Peter Egunjobi\Downloads\Video\Death Note\[Kayoanime] Death Note - 02.mkv"
-            ]);
         }
 
         private void SelectAll_OnClick(object sender, RoutedEventArgs e)
@@ -146,6 +191,8 @@ namespace ReelBox
         {
             var commandBar = (CommandBar)sender;
             var medium = (Medium)commandBar.DataContext;
+            commandBar.PrimaryCommands.Clear();
+            commandBar.SecondaryCommands.Clear();
             foreach (var actionModel in medium.ActionModels)
             {
                 var btn = new AppBarButton
@@ -154,6 +201,7 @@ namespace ReelBox
                     Label = actionModel.Text,
                     LabelPosition = CommandBarLabelPosition.Collapsed
                 };
+                btn.DataContext = actionModel;
                 btn.Click += ActionClicked;
                 commandBar.PrimaryCommands.Add(btn);
             }
@@ -161,6 +209,22 @@ namespace ReelBox
             var deleteButton = new AppBarButton { Icon = new SymbolIcon(Symbol.Delete), Label = "Delete" };
             deleteButton.Click += RemoveSingle_OnClick;
             commandBar.SecondaryCommands.Add(deleteButton);
+        }
+
+        private void MixSelected_OnClick(object sender, RoutedEventArgs e)
+        {
+            currentActionMedium = viewModel.Media.Last(m => m.IsSelected);
+            var mediaPath = viewModel.Media.Select(m => m.FilePath);
+            var thisTypeName = typeof(MainPage).FullName;
+            Frame.Navigate(typeof(MediaTrackMixerMainPage), new MixerProps { FfmpegPath = ffmpegPath, MediaPaths = mediaPath, TypeToNavigateTo = thisTypeName });
+        }
+
+        private void MergeSelected_OnClick(object sender, RoutedEventArgs e)
+        {
+            currentActionMedium = viewModel.Media.Last(m => m.IsSelected);
+            var mediaPath = viewModel.Media.Select(m => m.FilePath);
+            var thisTypeName = typeof(MainPage).FullName;
+            Frame.Navigate(typeof(ConcatMediaPage.ConcatMediaPage), new ConcatProps { FfmpegPath = ffmpegPath, MediaPaths = mediaPath, TypeToNavigateTo = thisTypeName });
         }
     }
 

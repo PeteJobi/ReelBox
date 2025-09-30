@@ -7,7 +7,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:converters="using:CommunityToolkit.WinUI.Converters"
-    mc:Ignorable="d" Loaded="MainPage_OnLoaded">
+    mc:Ignorable="d" Loaded="MainPage_OnLoaded" NavigationCacheMode="Enabled">
     <Page.Resources>
         <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
         <converters:StringVisibilityConverter x:Key="StringVisibilityConverter"/>
@@ -97,7 +97,7 @@
         </DataTemplate>
     </Page.Resources>
 
-    <Grid AllowDrop="True" Drop="MainPage_OnDrop" DragOver="MainPage_OnDragOver" Margin="10">
+    <Grid AllowDrop="True" Drop="MainPage_OnDrop" DragOver="MainPage_OnDragOver" Margin="10" HorizontalAlignment="Center" VerticalAlignment="Center">
         <RelativePanel Visibility="{x:Bind viewModel.HasMedia, Mode=OneWay}" Width="850">
             <ListView ItemsSource="{x:Bind viewModel.Media}" SelectionMode="None" Margin="0,10" 
                       ItemTemplate="{x:Bind viewModel.InCompactMode, Mode=OneWay, Converter={StaticResource MediumTemplateConverter}}"
@@ -129,13 +129,13 @@
                             <TextBlock HorizontalTextAlignment="Center" Text="{x:Bind viewModel.HasSelected, Mode=OneWay, Converter={StaticResource SelectedToRemoveText}}"/>
                         </StackPanel>
                     </Button>
-                    <Button Visibility="{x:Bind viewModel.HasSelected, Mode=OneWay}">
+                    <Button Click="MixSelected_OnClick" Visibility="{x:Bind viewModel.HasSelected, Mode=OneWay}">
                         <StackPanel Orientation="Horizontal" Spacing="10">
                             <SymbolIcon Symbol="Cut" />
                             <TextBlock HorizontalTextAlignment="Center">Mix selected</TextBlock>
                         </StackPanel>
                     </Button>
-                    <Button Visibility="{x:Bind viewModel.HasSelected, Mode=OneWay}">
+                    <Button Click="MergeSelected_OnClick" Visibility="{x:Bind viewModel.HasSelected, Mode=OneWay}">
                         <StackPanel Orientation="Horizontal" Spacing="10">
                             <FontIcon Glyph="&#xF5A9;" />
                             <TextBlock HorizontalTextAlignment="Center">Merge selected</TextBlock>

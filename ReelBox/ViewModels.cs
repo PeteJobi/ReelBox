@@ -77,7 +77,7 @@ namespace ReelBox
                 ActionModels = value.Select(a =>
                 {
                     var (icon, text) = ActionIconAndText(a);
-                    return new ActionModel{ Owner = this, Icon = icon, Text = text };
+                    return new ActionModel{ Action = a, Owner = this, Icon = icon, Text = text };
                 }).ToArray();
                 SetProperty(ref _availableactions, value, alsoNotify:nameof(ActionModels));
             }
@@ -127,6 +127,7 @@ namespace ReelBox
 
     public class ActionModel
     {
+        public Action Action { get; set; }
         public Medium Owner { get; set; }
         public string Icon { get; set; }
         public string Text { get; set; }
