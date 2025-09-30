@@ -27,7 +27,7 @@ namespace ReelBox
         public MainWindow()
         {
             InitializeComponent();
-            AppWindow.Resize(new SizeInt32(900, AppWindow.Size.Height));
+            //AppWindow.Resize(new SizeInt32(900, AppWindow.Size.Height));
             ExtendsContentIntoTitleBar = true;
             SetTitleBar(AppTitleBar);
             WindowFrame.Navigate(typeof(MainPage));
