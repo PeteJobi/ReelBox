@@ -122,24 +122,24 @@ namespace ReelBox
             var mediaPath = actionModel.Owner.FilePath;
             var thisTypeName = typeof(MainPage).FullName;
 
-            switch (actionModel.Action)
+            switch (actionModel.MediaAction)
             {
-                case Action.Split:
+                case MediaAction.Split:
                     Frame.Navigate(typeof(VideoSplitter.VideoSplitterPage), new SplitterProps { FfmpegPath = ffmpegPath, VideoPath = mediaPath, TypeToNavigateTo = thisTypeName });
                     break;
-                case Action.Merge:
+                case MediaAction.Merge:
                     Frame.Navigate(typeof(ConcatMediaPage.ConcatMediaPage), new ConcatProps { FfmpegPath = ffmpegPath, MediaPaths = [mediaPath], TypeToNavigateTo = thisTypeName });
                     break;
-                case Action.Crop:
+                case MediaAction.Crop:
                     Frame.Navigate(typeof(VideoCropper.VideoCropperPage), new CropperProps { FfmpegPath = ffmpegPath, VideoPath = mediaPath, TypeToNavigateTo = thisTypeName });
                     break;
-                case Action.Compress:
+                case MediaAction.Compress:
                     Frame.Navigate(typeof(CompressMediaPage.CompressMediaPage), new CompressProps { FfmpegPath = ffmpegPath, MediaPath = mediaPath, TypeToNavigateTo = thisTypeName });
                     break;
-                case Action.Mix:
+                case MediaAction.Mix:
                     Frame.Navigate(typeof(MediaTrackMixerMainPage), new MixerProps { FfmpegPath = ffmpegPath, MediaPaths = [mediaPath], TypeToNavigateTo = thisTypeName });
                     break;
-                case Action.Tour:
+                case MediaAction.Tour:
                     Frame.Navigate(typeof(ImageTour.ImageTourPage), new TourProps { FfmpegPath = ffmpegPath, MediaPath = mediaPath, TypeToNavigateTo = thisTypeName });
                     break;
             }

@@ -68,8 +68,8 @@ namespace ReelBox
             set => SetProperty(ref _details, value);
         }
         public MediaType MediaType { get; set; }
-        private Action[] _availableactions;
-        public Action[] AvailableActions
+        private MediaAction[] _availableactions;
+        public MediaAction[] AvailableActions
         {
             get => _availableactions;
             set
@@ -77,7 +77,7 @@ namespace ReelBox
                 ActionModels = value.Select(a =>
                 {
                     var (icon, text) = ActionIconAndText(a);
-                    return new ActionModel{ Action = a, Owner = this, Icon = icon, Text = text };
+                    return new ActionModel{ MediaAction = a, Owner = this, Icon = icon, Text = text };
                 }).ToArray();
                 SetProperty(ref _availableactions, value, alsoNotify:nameof(ActionModels));
             }
@@ -98,17 +98,17 @@ namespace ReelBox
         };
         public ActionModel[] ActionModels { get; set; }
 
-        private (string icon, string text) ActionIconAndText(Action action)
+        private (string icon, string text) ActionIconAndText(MediaAction mediaAction)
         {
-            return action switch
+            return mediaAction switch
             {
-                Action.Split => ("\uE78A", "Split"),
-                Action.Merge => ("\uF5A9", "Merge"),
-                Action.Crop => ("\uE7A8", "Crop"),
-                Action.Compress => ("\uE73F", "Compress"),
-                Action.Tour => ("\uF57D", "Tour"),
-                Action.Mix => ("\uE81E", "Mix"),
-                _ => throw new ArgumentOutOfRangeException(nameof(action), action, null)
+                MediaAction.Split => ("\uE78A", "Split"),
+                MediaAction.Merge => ("\uF5A9", "Merge"),
+                MediaAction.Crop => ("\uE7A8", "Crop"),
+                MediaAction.Compress => ("\uE73F", "Compress"),
+                MediaAction.Tour => ("\uF57D", "Tour"),
+                MediaAction.Mix => ("\uE81E", "Mix"),
+                _ => throw new ArgumentOutOfRangeException(nameof(mediaAction), mediaAction, null)
             };
         }
 
@@ -127,7 +127,7 @@ namespace ReelBox
 
     public class ActionModel
     {
-        public Action Action { get; set; }
+        public MediaAction MediaAction { get; set; }
         public Medium Owner { get; set; }
         public string Icon { get; set; }
         public string Text { get; set; }
@@ -190,7 +190,7 @@ namespace ReelBox
         Subtitle
     }
 
-    public enum Action
+    public enum MediaAction
     {
         Split,
         Merge,
