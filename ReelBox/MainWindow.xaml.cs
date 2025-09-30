@@ -27,9 +27,15 @@ namespace ReelBox
         public MainWindow()
         {
             InitializeComponent();
-            AppWindow.SetTitleBarIcon("Assets/EncircledPIERound.ico");
             AppWindow.Resize(new SizeInt32(900, AppWindow.Size.Height));
+            ExtendsContentIntoTitleBar = true;
+            SetTitleBar(AppTitleBar);
             WindowFrame.Navigate(typeof(MainPage));
+        }
+
+        private void MainWindow_OnClosed(object sender, WindowEventArgs args)
+        {
+            Processor.DeleteThumbnailFolder();
         }
     }
 }

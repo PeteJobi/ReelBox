@@ -29,9 +29,11 @@ namespace ReelBox
         public Processor(string ffmpegPath)
         {
             this.ffmpegPath = ffmpegPath;
-            thumbnailsFolder = Path.Join(Path.GetTempPath(), "ReelBoxThumbnails") + "/";
+            thumbnailsFolder = ThumbnailFolder();
             Directory.CreateDirectory(thumbnailsFolder);
         }
+
+        private static string ThumbnailFolder() => Path.Join(Path.GetTempPath(), "ReelBoxThumbnails") + "/";
 
         public static Medium GetMedium(string path)
         {
@@ -152,35 +154,7 @@ namespace ReelBox
             return details;
         }
 
-        public async Task<string?> GetThumbnailPath(string mediaPath, bool isImage)
-        {
-            try
-            {
-                const int thumbnailHeight = 110;
-                var seekCommand = string.Empty;
-                if (!isImage)
-                {
-                    var duration = TimeSpan.MinValue;
-                    await StartProcess($"-i \"{mediaPath}\"", null, (sender, args) =>
-                    {
-                        if (string.IsNullOrWhiteSpace(args.Data) || hasBeenKilled) return;
-                        if (duration != TimeSpan.MinValue) return;
-                        var matchCollection = Regex.Matches(args.Data, @"\s*Duration:\s(\d{2}:\d{2}:\d{2}\.\d{2}).+");
-                        if (matchCollection.Count == 0) return;
-                        duration = TimeSpan.Parse(matchCollection[0].Groups[1].Value);
-                    });
-                    var previewTimePoint = duration > TimeSpan.FromSeconds(5) ? TimeSpan.FromSeconds(5) : duration > TimeSpan.FromSeconds(2) ? TimeSpan.FromSeconds(2) : TimeSpan.Zero;
-                    seekCommand = $"-ss {previewTimePoint} ";
-                }
-                var thumbnailPath = Path.Join(thumbnailsFolder, $"{Path.GetRandomFileName()}.png");
-                await StartProcess($"{seekCommand}-i \"{mediaPath}\" -frames:v 1 -vf scale=w=-1:h={thumbnailHeight} \"{thumbnailPath}\"", null, null);
-                return thumbnailPath;
-            }
-            catch (Exception )
-            {
-                return null;
-            }
-        }
+        public static void DeleteThumbnailFolder() => Directory.Delete(ThumbnailFolder(), true);
 
         async Task StartProcess(string arguments, DataReceivedEventHandler? outputEventHandler, DataReceivedEventHandler? errorEventHandler)
         {
