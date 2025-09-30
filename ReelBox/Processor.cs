@@ -23,6 +23,7 @@ namespace ReelBox
         public static readonly List<string> AllSupportedTypes = SupportedVideoTypes.Concat(SupportedAudioTypes).Concat(SupportedImageTypes).Concat(SupportedSubtitleTypes).ToList();
         public static readonly int MaxThumbnailWidth = 196;
         public static readonly int MaxThumbnailHeight = 110;
+        public Dictionary<string, FileSystemWatcher> fileWatchers = [];
 
         public Processor(string ffmpegPath)
         {
@@ -54,14 +55,16 @@ namespace ReelBox
                 MediaType = mediaType,
                 AvailableActions = mediaType switch
                 {
-                    MediaType.Video => Enum.GetValues<Action>(),
-                    MediaType.Audio => [Action.Split, Action.Merge, Action.Compress, Action.Mix],
-                    MediaType.Image => [Action.Compress, Action.Mix, Action.Tour],
-                    MediaType.Subtitle => [Action.Mix],
+                    MediaType.Video => Enum.GetValues<MediaAction>(),
+                    MediaType.Audio => [MediaAction.Split, MediaAction.Merge, MediaAction.Compress, MediaAction.Mix],
+                    MediaType.Image => [MediaAction.Compress, MediaAction.Mix, MediaAction.Tour],
+                    MediaType.Subtitle => [MediaAction.Mix],
                     _ => throw new ArgumentOutOfRangeException()
                 }
             };
         }
+
+        public static void DeleteThumbnailFolder() => Directory.Delete(ThumbnailFolder(), true);
 
         public async Task<MediaDetails> GetMediaDetails(string mediaPath, MediaType mediaType)
         {
@@ -156,7 +159,31 @@ namespace ReelBox
             return details;
         }
 
-        public static void DeleteThumbnailFolder() => Directory.Delete(ThumbnailFolder(), true);
+        public void WatchFileDeletion(string mediaPath, Action onDeleted)
+        {
+            var directory = Path.GetDirectoryName(mediaPath);
+            if (directory == null) return;
+            if (fileWatchers.TryGetValue(directory, out var fileWatcher))
+            {
+                fileWatcher.Deleted += DeletionHandler;
+            }
+            else
+            {
+                var watcher = new FileSystemWatcher(directory)
+                {
+                    EnableRaisingEvents = true,
+                    IncludeSubdirectories = false,
+                    NotifyFilter = NotifyFilters.FileName
+                };
+                watcher.Deleted += DeletionHandler;
+                fileWatchers[directory] = watcher;
+            }
+
+            void DeletionHandler(object sender, FileSystemEventArgs args)
+            {
+                if (args.FullPath == mediaPath) onDeleted();
+            }
+        }
 
         async Task StartProcess(string arguments, DataReceivedEventHandler? outputEventHandler, DataReceivedEventHandler? errorEventHandler)
         {

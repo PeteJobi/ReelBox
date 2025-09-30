@@ -22,6 +22,7 @@ using CompressMediaPage;
 using ConcatMediaPage;
 using ImageTour;
 using MediaTrackMixerPage;
+using Microsoft.UI.Dispatching;
 using VideoCropper;
 using VideoSplitter;
 
@@ -64,6 +65,10 @@ namespace ReelBox
 
             await Task.WhenAll(
                 newMedia.Select(async m => m.Details = await processor.GetMediaDetails(m.FilePath, m.MediaType)));
+            newMedia.ForEach(m => processor.WatchFileDeletion(m.FilePath, () =>
+            {
+                DispatcherQueue.TryEnqueue(DispatcherQueuePriority.Normal, () => viewModel.Media.Remove(m));
+            }));
         }
 
         private void SetSelectedBools()
