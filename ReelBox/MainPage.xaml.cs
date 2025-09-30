@@ -215,7 +215,7 @@ namespace ReelBox
         private void MixSelected_OnClick(object sender, RoutedEventArgs e)
         {
             currentActionMedium = viewModel.Media.Last(m => m.IsSelected);
-            var mediaPath = viewModel.Media.Select(m => m.FilePath);
+            var mediaPath = viewModel.Media.Where(m => m.IsSelected).Select(m => m.FilePath);
             var thisTypeName = typeof(MainPage).FullName;
             Frame.Navigate(typeof(MediaTrackMixerMainPage), new MixerProps { FfmpegPath = ffmpegPath, MediaPaths = mediaPath, TypeToNavigateTo = thisTypeName });
         }
@@ -223,7 +223,7 @@ namespace ReelBox
         private void MergeSelected_OnClick(object sender, RoutedEventArgs e)
         {
             currentActionMedium = viewModel.Media.Last(m => m.IsSelected);
-            var mediaPath = viewModel.Media.Select(m => m.FilePath);
+            var mediaPath = viewModel.Media.Where(m => m.IsSelected).Select(m => m.FilePath);
             var thisTypeName = typeof(MainPage).FullName;
             Frame.Navigate(typeof(ConcatMediaPage.ConcatMediaPage), new ConcatProps { FfmpegPath = ffmpegPath, MediaPaths = mediaPath, TypeToNavigateTo = thisTypeName });
         }
