@@ -26,6 +26,8 @@ You can also just download the release builds if you don't wish to build manuall
 ## How to use
 When you open the program, you will be prompted to upload one or more media files. The supported file types are **mp4**, **mkv**, **mov**, **avi**, **mp3**, **wav**, **jpg**, **jpeg**, **png**, **gif**, **srt** and **ass**. Each media file uploaded will show up in a list, along with a thumbnail (if applicable), media details like resolution and bitrate, and buttons for each media-editing programs available for that file type. Clicking on one of those buttons will navigate you to a page for the chosen program. When you're done with that program, click the **Go back** button to return to the media list, and if there were any files generated, they will be added to the list right below the media file you edited, so you can repeat the process for them if you wish to edit further.
 
+Hovering over the thumbnail/icon will provide you with options to **open** the media file in your default player/viewer or **open the folder** containing the file.
+
 You can select multiple media by checking the box beside their names. To select or deselect all media, click the **(De)select all** button below the list. _MediaTrackMixer_ and _ConcatMedia_ accept multiple input files. When multiple media files are selected, **Mix selected** and **Merge selected** buttons show up, and you can click on either of those buttons to edit the selected files.
 
 Each media has a **Remove** button with which you can take the media off the list. There's also a **Remove all** button below the list to remove all media, or only those selected if there are any.
