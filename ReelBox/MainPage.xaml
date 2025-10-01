@@ -76,13 +76,9 @@
             </RelativePanel>
         </DataTemplate>
         <DataTemplate x:Key="MediumTemplateCompact" x:DataType="local:Medium">
-            <Grid Height="50" BorderBrush="{ThemeResource TextFillColorPrimaryBrush}" BorderThickness="1" Background="{ThemeResource MediumBackground}">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
+            <Grid Height="50" ColumnDefinitions="Auto,*" BorderBrush="{ThemeResource TextFillColorPrimaryBrush}" BorderThickness="1" Background="{ThemeResource MediumBackground}">
                 <CheckBox VerticalAlignment="Center" Padding="10,0,0,0" VerticalContentAlignment="Center"
-                          IsChecked="{x:Bind IsSelected, Mode=TwoWay}" Margin="10,0,0,0">
+                          IsChecked="{x:Bind IsSelected, Mode=TwoWay}" Margin="10,0,0,0" MaxWidth="790">
                     <Grid ColumnSpacing="10" VerticalAlignment="Center">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
