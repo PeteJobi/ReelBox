@@ -88,6 +88,13 @@ namespace ReelBox
             get => _isselected;
             set => SetProperty(ref _isselected, value);
         }
+        private bool _thumbnailhovered;
+        public bool ThumbnailHovered
+        {
+            get => _thumbnailhovered;
+            set => SetProperty(ref _thumbnailhovered, value);
+        }
+
         public string Icon => MediaType switch
         {
             MediaType.Video => "\uE714",

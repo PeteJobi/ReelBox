@@ -15,16 +15,31 @@
         <converters:BoolToObjectConverter x:Key="AllSelectedToSelectText" FalseValue="Select all" TrueValue="Deselect all"/>
         <converters:BoolToObjectConverter x:Key="MediumTemplateConverter" FalseValue="{StaticResource MediumTemplate}" TrueValue="{StaticResource MediumTemplateCompact}"/>
         <local:ImageUriConverter x:Key="ImageUriConverter"/>
+        <SolidColorBrush x:Key="TransBlack" Color="Black" Opacity="0.4" />
 
         <DataTemplate x:Key="MediumTemplate" x:DataType="local:Medium">
             <RelativePanel Padding="10" BorderBrush="{ThemeResource TextFillColorPrimaryBrush}" BorderThickness="1"
                    Background="{ThemeResource MediumBackground}">
                 <Grid x:Name="ThumbnailBox" Width="{x:Bind local:Processor.MaxThumbnailWidth}" Height="{x:Bind local:Processor.MaxThumbnailHeight}"
-                      Background="Black" Margin="0,0,10,0" CornerRadius="{StaticResource OverlayCornerRadius}">
+                      Background="Black" Margin="0,0,10,0" CornerRadius="{StaticResource OverlayCornerRadius}"
+                      PointerEntered="ThumbnailBox_OnPointerEntered" PointerExited="ThumbnailBox_OnPointerExited">
                     <Image Source="{x:Bind Details.ThumbnailPath, Mode=OneWay, Converter={StaticResource ImageUriConverter}}"
                            Visibility="{x:Bind Details.ThumbnailPath, Mode=OneWay, Converter={StaticResource StringVisibilityConverter}}"/>
                     <FontIcon Glyph="{x:Bind Icon}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="90"
                               Visibility="{x:Bind Details.ThumbnailPath, Mode=OneWay, Converter={StaticResource StringVisibilityConverter}, ConverterParameter=True}"/>
+                    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Padding="10" Background="{StaticResource TransBlack}"
+                          Visibility="{x:Bind ThumbnailHovered, Mode=OneWay}">
+                        <Viewbox Height="30">
+                            <StackPanel Orientation="Horizontal" Spacing="10" HorizontalAlignment="Center">
+                                <Button Click="OpenFile_Clicked" ToolTipService.ToolTip="Open">
+                                    <SymbolIcon Symbol="OpenFile"/>
+                                </Button>
+                                <Button Click="OpenFolder_Clicked" ToolTipService.ToolTip="Open folder">
+                                    <SymbolIcon Symbol="OpenLocal"/>
+                                </Button>
+                            </StackPanel>
+                        </Viewbox>
+                    </Grid>
                 </Grid>
                 <CheckBox x:Name="NameBox" RelativePanel.RightOf="ThumbnailBox" RelativePanel.AlignRightWithPanel="True" VerticalAlignment="Center"
                           Padding="10,0,0,0" VerticalContentAlignment="Center" IsChecked="{x:Bind IsSelected, Mode=TwoWay}">

@@ -185,6 +185,17 @@ namespace ReelBox
             }
         }
 
+        public void OpenFile(string path) => Process.Start(new ProcessStartInfo { FileName = path, UseShellExecute = true });
+
+        public void OpenFolder(string path)
+        {
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = "explorer",
+                Arguments = $"/e, /select, \"{path}\""
+            });
+        }
+
         async Task StartProcess(string arguments, DataReceivedEventHandler? outputEventHandler, DataReceivedEventHandler? errorEventHandler)
         {
             Process ffmpeg = new()

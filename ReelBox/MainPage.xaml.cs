@@ -1,4 +1,9 @@
+using CompressMediaPage;
+using ConcatMediaPage;
+using ImageTour;
+using MediaTrackMixerPage;
 using Microsoft.UI;
+using Microsoft.UI.Dispatching;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -13,18 +18,13 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
+using VideoCropper;
+using VideoSplitter;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Storage.Pickers;
-using CompressMediaPage;
-using ConcatMediaPage;
-using ImageTour;
-using MediaTrackMixerPage;
-using Microsoft.UI.Dispatching;
-using VideoCropper;
-using VideoSplitter;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -212,8 +212,14 @@ namespace ReelBox
                 commandBar.PrimaryCommands.Add(btn);
             }
 
+            var openButton = new AppBarButton { Icon = new SymbolIcon(Symbol.OpenFile), Label = "Open" };
+            openButton.Click += (s, args) => processor.OpenFile(medium.FilePath);
+            var openFolderButton = new AppBarButton { Icon = new SymbolIcon(Symbol.OpenLocal), Label = "Open folder" };
+            openFolderButton.Click += (s, args) => processor.OpenFolder(medium.FilePath);
             var deleteButton = new AppBarButton { Icon = new SymbolIcon(Symbol.Delete), Label = "Delete" };
             deleteButton.Click += RemoveSingle_OnClick;
+            commandBar.SecondaryCommands.Add(openButton);
+            commandBar.SecondaryCommands.Add(openFolderButton);
             commandBar.SecondaryCommands.Add(deleteButton);
         }
 
@@ -231,6 +237,34 @@ namespace ReelBox
             var mediaPath = viewModel.Media.Where(m => m.IsSelected).Select(m => m.FilePath);
             var thisTypeName = typeof(MainPage).FullName;
             Frame.Navigate(typeof(ConcatMediaPage.ConcatMediaPage), new ConcatProps { FfmpegPath = ffmpegPath, MediaPaths = mediaPath, TypeToNavigateTo = thisTypeName });
+        }
+
+        private void ThumbnailBox_OnPointerEntered(object sender, PointerRoutedEventArgs e)
+        {
+            var grid = (Grid)sender;
+            var medium = (Medium)grid.DataContext;
+            medium.ThumbnailHovered = true;
+        }
+
+        private void ThumbnailBox_OnPointerExited(object sender, PointerRoutedEventArgs e)
+        {
+            var grid = (Grid)sender;
+            var medium = (Medium)grid.DataContext;
+            medium.ThumbnailHovered = false;
+        }
+
+        private void OpenFile_Clicked(object sender, RoutedEventArgs e)
+        {
+            var button = (Button)sender;
+            var medium = (Medium)button.DataContext;
+            processor.OpenFile(medium.FilePath);
+        }
+
+        private void OpenFolder_Clicked(object sender, RoutedEventArgs e)
+        {
+            var button = (Button)sender;
+            var medium = (Medium)button.DataContext;
+            processor.OpenFolder(medium.FilePath);
         }
     }
 
