@@ -22,3 +22,6 @@
 [submodule "DraggerResizerWinUI"]
 	path = DraggerResizerWinUI
 	url = https://github.com/PeteJobi/DraggerResizerWinUI.git
+[submodule "TimelineWinUI"]
+	path = TimelineWinUI
+	url = https://github.com/PeteJobi/TimelineWinUI.git
