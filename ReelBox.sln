@@ -21,6 +21,8 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "DraggerResizer", "DraggerRe
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "VideoSplitterBase", "VideoSplitterBaseWinUI\VideoSplitterBase.shproj", "{875AC41B-16E1-4AE2-AEB6-C57576B303C6}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Timeline", "TimelineWinUI\Timeline.shproj", "{8A87FF88-D9FA-499F-971F-6A8B191EB7C5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|ARM64 = Debug|ARM64
@@ -64,12 +66,14 @@ Global
 		DraggerResizerWinUI\DraggerResizer.projitems*{3b348305-4316-4cf7-8127-5cf9733077c8}*SharedItemsImports = 5
 		ImageTourPageWinUI\ImageTourPage.projitems*{3b348305-4316-4cf7-8127-5cf9733077c8}*SharedItemsImports = 5
 		MediaTrackMixerPageWinUI\MediaTrackMixerPage.projitems*{3b348305-4316-4cf7-8127-5cf9733077c8}*SharedItemsImports = 5
+		TimelineWinUI\Timeline.projitems*{3b348305-4316-4cf7-8127-5cf9733077c8}*SharedItemsImports = 5
 		VideoCropperPageWinUI\VideoCropperPage.projitems*{3b348305-4316-4cf7-8127-5cf9733077c8}*SharedItemsImports = 5
 		VideoSplitterBaseWinUI\VideoSplitterBase.projitems*{3b348305-4316-4cf7-8127-5cf9733077c8}*SharedItemsImports = 5
 		VideoSplitterPageWinUI\VideoSplitterPage.projitems*{3b348305-4316-4cf7-8127-5cf9733077c8}*SharedItemsImports = 5
 		CompressMediaPageWinUI\CompressMediaPage.projitems*{40b273df-70a4-4fd2-9e2c-098067d39fbb}*SharedItemsImports = 13
 		MediaTrackMixerPageWinUI\MediaTrackMixerPage.projitems*{41bd008e-af39-42e1-9d50-8fb0f51d1a24}*SharedItemsImports = 13
 		VideoSplitterBaseWinUI\VideoSplitterBase.projitems*{875ac41b-16e1-4ae2-aeb6-c57576b303c6}*SharedItemsImports = 13
+		TimelineWinUI\Timeline.projitems*{8a87ff88-d9fa-499f-971f-6a8b191eb7c5}*SharedItemsImports = 13
 		ConcatMediaPageWinUI\ConcatMediaPage.projitems*{8ae49b4f-4daa-4cda-b2c1-07abbf7c89e7}*SharedItemsImports = 13
 		VideoCropperPageWinUI\VideoCropperPage.projitems*{b939521d-3d99-4a7f-8ff5-1472ea1a0b49}*SharedItemsImports = 13
 		VideoSplitterPageWinUI\VideoSplitterPage.projitems*{f2ab1059-95a2-4a58-a3d2-a409961585db}*SharedItemsImports = 13
