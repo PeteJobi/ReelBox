@@ -13,21 +13,13 @@
                 <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
                 <!-- Other merged dictionaries here -->
                 <ResourceDictionary Source="Resources/SplitDictionary.xaml"></ResourceDictionary>
-                <ResourceDictionary Source="Resources/ConcatDictionary.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="Resources/TourDictionary.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="Resources/WinUISharedDictionary.xaml"></ResourceDictionary>
                 <videoSplitterResources:Templates/>
                 <imageTourResources:Templates/>
                 <mediaMixerResources:Template/>
             </ResourceDictionary.MergedDictionaries>
             <!-- Other app resources here -->
-            <ResourceDictionary.ThemeDictionaries>
-                <ResourceDictionary x:Key="Light">
-                    <SolidColorBrush x:Key="MediumBackground" Color="AliceBlue"/>
-                </ResourceDictionary>
-                <ResourceDictionary x:Key="Dark">
-                    <SolidColorBrush x:Key="MediumBackground" Color="#262626"/>
-                </ResourceDictionary>
-            </ResourceDictionary.ThemeDictionaries>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -19,7 +19,7 @@
 
         <DataTemplate x:Key="MediumTemplate" x:DataType="local:Medium">
             <RelativePanel Padding="10" BorderBrush="{ThemeResource TextFillColorPrimaryBrush}" BorderThickness="1"
-                   Background="{ThemeResource MediumBackground}">
+                   Background="{ThemeResource ListItemBackground}">
                 <Grid x:Name="ThumbnailBox" Width="{x:Bind local:Processor.MaxThumbnailWidth}" Height="{x:Bind local:Processor.MaxThumbnailHeight}"
                       Background="Black" Margin="0,0,10,0" CornerRadius="{StaticResource OverlayCornerRadius}"
                       PointerEntered="ThumbnailBox_OnPointerEntered" PointerExited="ThumbnailBox_OnPointerExited">
@@ -91,7 +91,7 @@
             </RelativePanel>
         </DataTemplate>
         <DataTemplate x:Key="MediumTemplateCompact" x:DataType="local:Medium">
-            <Grid Height="50" ColumnDefinitions="Auto,*" BorderBrush="{ThemeResource TextFillColorPrimaryBrush}" BorderThickness="1" Background="{ThemeResource MediumBackground}">
+            <Grid Height="50" ColumnDefinitions="Auto,*" BorderBrush="{ThemeResource TextFillColorPrimaryBrush}" BorderThickness="1" Background="{ThemeResource ListItemBackground}">
                 <CheckBox VerticalAlignment="Center" Padding="10,0,0,0" VerticalContentAlignment="Center"
                           IsChecked="{x:Bind IsSelected, Mode=TwoWay}" Margin="10,0,0,0" MaxWidth="790">
                     <Grid ColumnSpacing="10" VerticalAlignment="Center">
