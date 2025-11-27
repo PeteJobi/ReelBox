@@ -20,7 +20,6 @@
     <None Remove="Assets\BadgeLogo.scale-400.png" />
     <None Remove="Assets\EncircledPIERound.ico" />
     <None Remove="Assets\ffmpeg.exe" />
-    <None Remove="MainPage.xaml" />
   </ItemGroup>
 
   <ItemGroup>
