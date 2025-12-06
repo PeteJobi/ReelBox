@@ -74,7 +74,7 @@ namespace ReelBox
         private void SetSelectedBools()
         {
             viewModel.HasSelected = viewModel.Media.Any(m => m.IsSelected);
-            viewModel.AllAreSelected = viewModel.Media.All(m => m.IsSelected);
+            viewModel.AllAreSelected = viewModel.HasSelected && viewModel.Media.All(m => m.IsSelected);
         }
 
         private async void MainPage_OnDrop(object sender, DragEventArgs e)
