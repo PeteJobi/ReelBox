@@ -125,16 +125,16 @@ namespace ReelBox
             switch (actionModel.MediaAction)
             {
                 case MediaAction.Split:
-                    Frame.Navigate(typeof(VideoSplitter.VideoSplitterPage), new SplitterProps { FfmpegPath = ffmpegPath, VideoPath = mediaPath, TypeToNavigateTo = thisTypeName });
+                    Frame.Navigate(typeof(VideoSplitter.VideoSplitterPage), new SplitterProps { FfmpegPath = ffmpegPath, VideoPath = mediaPath, TypeToNavigateTo = thisTypeName, Gpu = viewModel.SelectedGpu });
                     break;
                 case MediaAction.Merge:
                     Frame.Navigate(typeof(ConcatMediaPage.ConcatMediaPage), new ConcatProps { FfmpegPath = ffmpegPath, MediaPaths = [mediaPath], TypeToNavigateTo = thisTypeName });
                     break;
                 case MediaAction.Crop:
-                    Frame.Navigate(typeof(VideoCropper.VideoCropperPage), new CropperProps { FfmpegPath = ffmpegPath, VideoPath = mediaPath, TypeToNavigateTo = thisTypeName });
+                    Frame.Navigate(typeof(VideoCropper.VideoCropperPage), new CropperProps { FfmpegPath = ffmpegPath, VideoPath = mediaPath, TypeToNavigateTo = thisTypeName, Gpu = viewModel.SelectedGpu });
                     break;
                 case MediaAction.Compress:
-                    Frame.Navigate(typeof(CompressMediaPage.CompressMediaPage), new CompressProps { FfmpegPath = ffmpegPath, MediaPath = mediaPath, TypeToNavigateTo = thisTypeName });
+                    Frame.Navigate(typeof(CompressMediaPage.CompressMediaPage), new CompressProps { FfmpegPath = ffmpegPath, MediaPath = mediaPath, TypeToNavigateTo = thisTypeName, Gpu = viewModel.SelectedGpu });
                     break;
                 case MediaAction.Mix:
                     Frame.Navigate(typeof(MediaTrackMixerMainPage), new MixerProps { FfmpegPath = ffmpegPath, MediaPaths = [mediaPath], TypeToNavigateTo = thisTypeName });
