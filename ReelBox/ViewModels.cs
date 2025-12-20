@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using WinUIShared.Controls;
 
 namespace ReelBox
 {
@@ -40,6 +41,12 @@ namespace ReelBox
         {
             get => _allareselected;
             set => SetProperty(ref _allareselected, value);
+        }
+        private GpuInfo _selectedgpu;
+        public GpuInfo SelectedGpu
+        {
+            get => _selectedgpu;
+            set => SetProperty(ref _selectedgpu, value);
         }
 
         public bool HasMedia => Media.Count > 0;

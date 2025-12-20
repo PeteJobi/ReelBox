@@ -7,6 +7,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:converters="using:CommunityToolkit.WinUI.Converters"
+    xmlns:controls="using:WinUIShared.Controls"
     mc:Ignorable="d" Loaded="MainPage_OnLoaded" NavigationCacheMode="Enabled">
     <Page.Resources>
         <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
@@ -111,9 +112,12 @@
 
     <Grid AllowDrop="True" Drop="MainPage_OnDrop" DragOver="MainPage_OnDragOver" Margin="10" HorizontalAlignment="Center" VerticalAlignment="Center">
         <RelativePanel Visibility="{x:Bind viewModel.HasMedia, Mode=OneWay}" Width="850">
-            <ListView ItemsSource="{x:Bind viewModel.Media}" SelectionMode="None" Margin="0,10" 
+            <controls:HardwareSelector Name="HardwareSelector" SelectedGpu="{x:Bind viewModel.SelectedGpu, Mode=TwoWay}"
+                                       RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True"/>
+            <ListView ItemsSource="{x:Bind viewModel.Media}" SelectionMode="None" Margin="0,10"
                       ItemTemplate="{x:Bind viewModel.InCompactMode, Mode=OneWay, Converter={StaticResource MediumTemplateConverter}}"
-                      RelativePanel.Above="ButtonsGrid" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True">
+                      RelativePanel.Above="ButtonsGrid" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True"
+                      RelativePanel.Below="HardwareSelector">
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
                         <Setter Property="Padding" Value="0"></Setter>
