@@ -25,6 +25,8 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Timeline", "TimelineWinUI\T
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "WinUIShared", "WinUIShared\WinUIShared.shproj", "{EAEDEDF3-CC91-4D2B-8476-35DD81F8D00A}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "TextToTimeSpan", "TextToTimeSpanWinUI\TextToTimeSpan.shproj", "{8473885D-BD20-4CD5-9848-93DFF6689070}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|ARM64 = Debug|ARM64
@@ -68,6 +70,7 @@ Global
 		DraggerResizerWinUI\DraggerResizer.projitems*{3b348305-4316-4cf7-8127-5cf9733077c8}*SharedItemsImports = 5
 		ImageTourPageWinUI\ImageTourPage.projitems*{3b348305-4316-4cf7-8127-5cf9733077c8}*SharedItemsImports = 5
 		MediaTrackMixerPageWinUI\MediaTrackMixerPage.projitems*{3b348305-4316-4cf7-8127-5cf9733077c8}*SharedItemsImports = 5
+		TextToTimeSpanWinUI\TextToTimeSpan.projitems*{3b348305-4316-4cf7-8127-5cf9733077c8}*SharedItemsImports = 5
 		TimelineWinUI\Timeline.projitems*{3b348305-4316-4cf7-8127-5cf9733077c8}*SharedItemsImports = 5
 		VideoCropperPageWinUI\VideoCropperPage.projitems*{3b348305-4316-4cf7-8127-5cf9733077c8}*SharedItemsImports = 5
 		VideoSplitterBaseWinUI\VideoSplitterBase.projitems*{3b348305-4316-4cf7-8127-5cf9733077c8}*SharedItemsImports = 5
@@ -75,6 +78,7 @@ Global
 		WinUIShared\WinUIShared.projitems*{3b348305-4316-4cf7-8127-5cf9733077c8}*SharedItemsImports = 5
 		CompressMediaPageWinUI\CompressMediaPage.projitems*{40b273df-70a4-4fd2-9e2c-098067d39fbb}*SharedItemsImports = 13
 		MediaTrackMixerPageWinUI\MediaTrackMixerPage.projitems*{41bd008e-af39-42e1-9d50-8fb0f51d1a24}*SharedItemsImports = 13
+		TextToTimeSpanWinUI\TextToTimeSpan.projitems*{8473885d-bd20-4cd5-9848-93dff6689070}*SharedItemsImports = 13
 		VideoSplitterBaseWinUI\VideoSplitterBase.projitems*{875ac41b-16e1-4ae2-aeb6-c57576b303c6}*SharedItemsImports = 13
 		TimelineWinUI\Timeline.projitems*{8a87ff88-d9fa-499f-971f-6a8b191eb7c5}*SharedItemsImports = 13
 		ConcatMediaPageWinUI\ConcatMediaPage.projitems*{8ae49b4f-4daa-4cda-b2c1-07abbf7c89e7}*SharedItemsImports = 13
