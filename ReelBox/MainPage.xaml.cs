@@ -140,7 +140,7 @@ namespace ReelBox
                     Frame.Navigate(typeof(MediaTrackMixerMainPage), new MixerProps { FfmpegPath = ffmpegPath, MediaPaths = [mediaPath], TypeToNavigateTo = thisTypeName });
                     break;
                 case MediaAction.Tour:
-                    Frame.Navigate(typeof(ImageTour.ImageTourPage), new TourProps { FfmpegPath = ffmpegPath, MediaPath = mediaPath, TypeToNavigateTo = thisTypeName });
+                    Frame.Navigate(typeof(ImageTour.ImageTourPage), new TourProps { FfmpegPath = ffmpegPath, MediaPath = mediaPath, TypeToNavigateTo = thisTypeName, Gpu = viewModel.SelectedGpu });
                     break;
             }
         }
@@ -176,6 +176,9 @@ namespace ReelBox
                 return;
             }
             processor = new Processor(ffmpegPath);
+
+            await Task.Delay(10);
+            await AddMedia([@"C:\Users\Peter Egunjobi\Pictures\2592x1944_TOURED.mp4"]);
         }
 
         private void SelectAll_OnClick(object sender, RoutedEventArgs e)
