@@ -3,21 +3,14 @@
     x:Class="ReelBox.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:ReelBox"
-    xmlns:videoSplitterResources="using:VideoSplitterPage.Resources"
-    xmlns:mediaMixerResources="using:MediaTrackMixer.Resources"
-    xmlns:imageTourResources="using:ImageTour.Resources">
+    xmlns:videoSplitterResources="using:VideoSplitterPage.Resources">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
                 <!-- Other merged dictionaries here -->
-                <ResourceDictionary Source="Resources/SplitDictionary.xaml"></ResourceDictionary>
-                <ResourceDictionary Source="Resources/TourDictionary.xaml"></ResourceDictionary>
-                <ResourceDictionary Source="Resources/WinUISharedDictionary.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="Resources/SplitDictionary.xaml"/>
                 <videoSplitterResources:Templates/>
-                <imageTourResources:Templates/>
-                <mediaMixerResources:Template/>
             </ResourceDictionary.MergedDictionaries>
             <!-- Other app resources here -->
         </ResourceDictionary>
