@@ -176,9 +176,6 @@ namespace ReelBox
                 return;
             }
             processor = new Processor(ffmpegPath);
-
-            await Task.Delay(10);
-            await AddMedia([@"C:\Users\Peter Egunjobi\Pictures\2592x1944_TOURED.mp4"]);
         }
 
         private void SelectAll_OnClick(object sender, RoutedEventArgs e)
