@@ -185,14 +185,14 @@ namespace ReelBox
             }
         }
 
-        public void OpenFile(string path) => Process.Start(new ProcessStartInfo { FileName = path, UseShellExecute = true });
+        public void OpenFile(string path) => Process.Start(new ProcessStartInfo { FileName = WinUIShared.Helpers.Processor.GetSafePath(path), UseShellExecute = true });
 
         public void OpenFolder(string path)
         {
             Process.Start(new ProcessStartInfo
             {
                 FileName = "explorer",
-                Arguments = $"/e, /select, \"{path}\""
+                Arguments = $"/e, /select, \"{WinUIShared.Helpers.Processor.GetSafePath(path)}\""
             });
         }
 
