@@ -147,7 +147,7 @@
                     </Button>
                     <Button Click="MixSelected_OnClick" Visibility="{x:Bind viewModel.HasSelected, Mode=OneWay}">
                         <StackPanel Orientation="Horizontal" Spacing="10">
-                            <SymbolIcon Symbol="Cut" />
+                            <FontIcon Glyph="&#xE81E;" />
                             <TextBlock HorizontalTextAlignment="Center">Mix selected</TextBlock>
                         </StackPanel>
                     </Button>
