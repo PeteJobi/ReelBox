@@ -27,6 +27,8 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "WinUIShared", "WinUIShared\
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "TextToTimeSpan", "TextToTimeSpanWinUI\TextToTimeSpan.shproj", "{8473885D-BD20-4CD5-9848-93DFF6689070}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileLogger", "FileLogger\FileLogger\FileLogger.csproj", "{972BDDBA-E3B9-0A2F-B257-C1D0B9828BD4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|ARM64 = Debug|ARM64
@@ -55,6 +57,18 @@ Global
 		{3B348305-4316-4CF7-8127-5CF9733077C8}.Release|x86.ActiveCfg = Release|x86
 		{3B348305-4316-4CF7-8127-5CF9733077C8}.Release|x86.Build.0 = Release|x86
 		{3B348305-4316-4CF7-8127-5CF9733077C8}.Release|x86.Deploy.0 = Release|x86
+		{972BDDBA-E3B9-0A2F-B257-C1D0B9828BD4}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{972BDDBA-E3B9-0A2F-B257-C1D0B9828BD4}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{972BDDBA-E3B9-0A2F-B257-C1D0B9828BD4}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{972BDDBA-E3B9-0A2F-B257-C1D0B9828BD4}.Debug|x64.Build.0 = Debug|Any CPU
+		{972BDDBA-E3B9-0A2F-B257-C1D0B9828BD4}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{972BDDBA-E3B9-0A2F-B257-C1D0B9828BD4}.Debug|x86.Build.0 = Debug|Any CPU
+		{972BDDBA-E3B9-0A2F-B257-C1D0B9828BD4}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{972BDDBA-E3B9-0A2F-B257-C1D0B9828BD4}.Release|ARM64.Build.0 = Release|Any CPU
+		{972BDDBA-E3B9-0A2F-B257-C1D0B9828BD4}.Release|x64.ActiveCfg = Release|Any CPU
+		{972BDDBA-E3B9-0A2F-B257-C1D0B9828BD4}.Release|x64.Build.0 = Release|Any CPU
+		{972BDDBA-E3B9-0A2F-B257-C1D0B9828BD4}.Release|x86.ActiveCfg = Release|Any CPU
+		{972BDDBA-E3B9-0A2F-B257-C1D0B9828BD4}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
