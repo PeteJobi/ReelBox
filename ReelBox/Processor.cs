@@ -57,7 +57,7 @@ namespace ReelBox
                 {
                     MediaType.Video => Enum.GetValues<MediaAction>(),
                     MediaType.Audio => [MediaAction.Split, MediaAction.Merge, MediaAction.Compress, MediaAction.Mix],
-                    MediaType.Image => [MediaAction.Compress, MediaAction.Mix, MediaAction.Tour],
+                    MediaType.Image => [MediaAction.Compress, MediaAction.Mix, MediaAction.Tour, MediaAction.Pad],
                     MediaType.Subtitle => [MediaAction.Mix],
                     _ => throw new ArgumentOutOfRangeException()
                 }

@@ -25,6 +25,7 @@ using Windows.ApplicationModel.DataTransfer;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Storage.Pickers;
+using MediaPadderPage;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -141,6 +142,9 @@ namespace ReelBox
                     break;
                 case MediaAction.Tour:
                     Frame.Navigate(typeof(ImageTour.ImageTourPage), new TourProps { FfmpegPath = ffmpegPath, MediaPath = mediaPath, TypeToNavigateTo = thisTypeName, Gpu = viewModel.SelectedGpu });
+                    break;
+                case MediaAction.Pad:
+                    Frame.Navigate(typeof(MediaPadderPage.MediaPadderPage), new PadderProps { FfmpegPath = ffmpegPath, MediaPath = mediaPath, TypeToNavigateTo = thisTypeName, Gpu = viewModel.SelectedGpu });
                     break;
             }
         }

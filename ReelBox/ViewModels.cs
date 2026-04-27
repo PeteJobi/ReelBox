@@ -122,6 +122,7 @@ namespace ReelBox
                 MediaAction.Compress => ("\uE73F", "Compress"),
                 MediaAction.Tour => ("\uF57D", "Tour"),
                 MediaAction.Mix => ("\uE81E", "Mix"),
+                MediaAction.Pad => ("\uF5AD", "Pad"),
                 _ => throw new ArgumentOutOfRangeException(nameof(mediaAction), mediaAction, null)
             };
         }
@@ -211,6 +212,7 @@ namespace ReelBox
         Crop,
         Compress,
         Mix,
-        Tour
+        Tour,
+        Pad
     }
 }
