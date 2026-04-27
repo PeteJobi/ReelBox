@@ -34,3 +34,6 @@
 [submodule "FileLogger"]
 	path = FileLogger
 	url = https://github.com/PeteJobi/FileLogger.git
+[submodule "MediaPadderPageWinUI"]
+	path = MediaPadderPageWinUI
+	url = https://github.com/PeteJobi/MediaPadderPageWinUI.git
