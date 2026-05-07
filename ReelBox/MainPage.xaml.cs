@@ -153,11 +153,13 @@ namespace ReelBox
         {
             if (e.Parameter is string outputFile)
             {
+                await Task.Delay(200); //This fixes an 'insert-in-list' animation bug where an older item is animated into the list instead of the new item
                 await AddMedia([outputFile], viewModel.Media.IndexOf(currentActionMedium) + 1);
             }
 
             if (e.Parameter is List<string> outputFiles)
             {
+                await Task.Delay(200);
                 await AddMedia(outputFiles.ToArray(), viewModel.Media.IndexOf(currentActionMedium) + 1);
             }
 
